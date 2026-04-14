@@ -1,0 +1,24 @@
+1. installer airflow-pakken:
+- pip install 'apache-airflow==3.2.0' --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.2.0/constraints-3.10.txt"
+
+vanlig Airflow fungerer ikke direkte på Windows, men det går fint siden vi kjører med Docker lokalt.
+
+2. hent ferdig docker-compose.yaml fra Apache Airflow:
+- windows: Invoke-WebRequest -Uri "https://airflow.apache.org/docs/apache-airflow/3.2.0/docker-compose.yaml" -OutFile "docker-compose.yaml"
+- linux: curl -L "https://airflow.apache.org/docs/apache-airflow/3.2.0/docker-compose.yaml" -o docker-compose.yaml
+
+3. lag .env-fila automatisk:
+- Set-Content -Path ".env" -Value "AIRFLOW_UID=50000"
+
+4. initialiser Airflow-oppsettet:
+- docker compose up airflow-init
+
+5. start Airflow:
+- docker compose up
+
+6. åpne Airflow i nettleseren:
+- http://localhost:8080
+
+login:
+- brukernavn: airflow
+- passord: airflow
