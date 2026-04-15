@@ -22,3 +22,6 @@ vanlig Airflow fungerer ikke direkte på Windows, men det går fint siden vi kj�
 login:
 - brukernavn: airflow
 - passord: airflow
+
+7. for å slå av:
+- docker-compose down -v
