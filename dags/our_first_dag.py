@@ -18,7 +18,10 @@ with DAG(
     schedule='@daily',
     default_args=default_args,
     catchup=False
+
+
 ) as dag:
+
     task1 = BashOperator(
         task_id='task1',
         bash_command='echo "Dette er første dag, bra jobba Vlorjan, du lærte dette fort!"',
