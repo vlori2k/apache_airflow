@@ -74,6 +74,7 @@ x-airflow-common:
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    #_PIP_ADDITIONAL_REQUIREMENTS: apache-airflow-providers-postgres
     # The following line can be used to set a custom config file, stored in the local config folder
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
   volumes:
@@ -98,6 +99,8 @@ services:
       POSTGRES_DB: airflow
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s

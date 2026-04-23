@@ -8,7 +8,7 @@ vanlig Airflow fungerer ikke direkte på Windows, men det går fint siden vi kj�
 - linux: curl -L "https://airflow.apache.org/docs/apache-airflow/3.2.0/docker-compose.yaml" -o docker-compose.yaml
 
 3. lag .env-fila automatisk:
-- Set-Content -Path ".env" -Value "AIRFLOW_UID=50000"
+- Set-Content -Path ".env" -Value "AIRFLOW_UID=50000`
 
 4. initialiser Airflow-oppsettet:
 - docker compose up airflow-init
@@ -24,4 +24,4 @@ login:
 - passord: airflow
 
 7. for å slå av:
-- docker-compose down -v
+- docker compose down -v
