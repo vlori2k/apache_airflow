@@ -25,3 +25,30 @@ login:
 
 7. for å slå av:
 - docker compose down -v
+
+
+
+ekstra kommandoer:
+
+- docker compose up -d --no-deps --build airflow-apiserver airflow-scheduler'
+
+hva gjør dette?:
+bygg opp igjen og start bare airflow-apiserver og airflow-scheduler, i bakgrunnen, uten å starte avhengige tjenester automatisk.
+
+Del for del:
+docker compose up
+starter tjenester fra docker-compose.yaml
+
+-d
+kjør dem i bakgrunnen, detached mode
+
+--no-deps
+ikke start andre services som disse vanligvis er avhengige av, som for eksempel Postgres eller Redis
+
+--build
+bygg imaget på nytt før oppstart, for eksempel hvis du har endret Dockerfile
+airflow-apiserver airflow-scheduler
+bare disse to tjenestene skal startes
+
+Så i praksis:
+“Bygg på nytt og start bare Airflow API-server og scheduler i bakgrunnen.”
