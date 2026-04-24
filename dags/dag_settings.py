@@ -21,10 +21,14 @@ class DagSettings:
         }
 
 
-    def create_default_args(self, name: str, retries: int, retry_delay: timedelta) -> dict:
+    def set_retries(self, retries: int) -> None:
+        self.retries = retries
+        self.dag_settings.default_args['retries'] = self.retries
+
+    def create_default_args(self, name: str, retries: int, retry_delay: int) -> dict:
         self.owner_name = name
         self.retries = retries
-        self.retry_delay = retry_delay
+        self.retry_delay = timedelta(minutes=retry_delay)
 
 
         self.default_args = {

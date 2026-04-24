@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
 
+from dag_settings import DagSettings
+
 
 class DagController:
     def __init__(self):
@@ -22,14 +24,13 @@ class DagController:
 
         self.bash_command = 'echo "dag with cron expression"'
 
+        self.dag_settings = DagSettings()
+
 
 
     def set_schedule(self, schedule: str) -> None:
         self.schedule = schedule
 
-    def set_retries(self, retries: int) -> None:
-        self.retries = retries
-        self.default_args['retries'] = self.retries
 
     def set_datetime_for_task(self, year: int, month: int, day: int) -> None:
         self.year = year
@@ -47,15 +48,17 @@ class DagController:
     def generate_dag(self, dag_id: str) -> DAG:
         with DAG(
             dag_id=dag_id,
-            default_args=self.default_args,
+            default_args=self.dag_settings.default_args,
             start_date=datetime(self.year, self.month, self.day),
             schedule=self.schedule,
             catchup=self.catchup,
+
         ) as dag:
 
             BashOperator(
-                task_id='cron_task1',
+                task_id='task1',
                 bash_command=self.bash_command,
             )
 
         return dag
+
